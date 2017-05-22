@@ -1,0 +1,33 @@
+{
+    "name": "Tan/Slim-Skeleton-MVC",
+    "description": "基于 Slim 框架的 MVC 脚手架。",
+    "keywords": ["Slim", "脚手架", "MVC"],
+    "homepage": "https://github.com/dolphin836/Slim-Skeleton-MVC",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dolphin.wang",
+            "email": "416509859@qq.com",
+            "homepage": "http://hbdx.cc/"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.1",
+        "vlucas/phpdotenv": "^2.4",
+        "catfan/Medoo": "^1.4"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Dolphin\\Tan\\": "app/"
+        }
+    },
+	"scripts": {
+        "start": "php -S localhost:8080 -t public"
+	}
+}
