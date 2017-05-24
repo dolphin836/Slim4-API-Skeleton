@@ -1,9 +1,5 @@
----
-layout: home
----
-
 # Slim-Skeleton-MVC
-基于 Slim 框架的 MVC 脚手架。
+这是一个基于 Slim 的 MVC 脚手架。
 
 [Slim Documentation](https://www.slimframework.com/docs/start/installation.html)
 
