@@ -17,10 +17,8 @@ https://github.com/vlucas/phpdotenv
 ### TODO
 
 - 微信和支付宝中间件
-- View
 - 完善介绍，标准化
 - 测试用例
 - 持续集成
 - 自动文档
-- Package
 - 支付
