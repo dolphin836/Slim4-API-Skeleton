@@ -15,7 +15,7 @@ use Psr\Container\ContainerInterface as ContainerInterface;
 **/
 class Base
 {
-    protected $ci;
+    protected $app;
 
     /**
     * 构造函数
@@ -24,9 +24,9 @@ class Base
     *
     * @return void
     **/
-    function __construct(ContainerInterface $ci)
+    function __construct(ContainerInterface $app)
     {
-        $this->ci = $ci;
+        $this->app = $app;
     }
 }
 

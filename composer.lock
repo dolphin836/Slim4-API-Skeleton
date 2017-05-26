@@ -4,68 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d507c3511cc6404b56738e747fe4e212",
+    "content-hash": "6b2482fa2669c273ae77611246d1c1df",
     "packages": [
         {
-            "name": "akrabat/rka-scheme-and-host-detection-middleware",
-            "version": "0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/akrabat/rka-scheme-and-host-detection-middleware.git",
-                "reference": "5b5e9668d3291ffeafe487ffc00b5344b945a369"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/akrabat/rka-scheme-and-host-detection-middleware/5b5e9668d3291ffeafe487ffc00b5344b945a369.zip",
-                "reference": "5b5e9668d3291ffeafe487ffc00b5344b945a369",
-                "shasum": ""
-            },
-            "require": {
-                "psr/http-message": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8",
-                "squizlabs/php_codesniffer": "^2.3",
-                "zendframework/zend-diactoros": "^1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "RKA\\Middleware\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Allen",
-                    "email": "rob@akrabat.com",
-                    "homepage": "http://akrabat.com"
-                }
-            ],
-            "description": "PSR-7 Middleware that determines the scheme, host and port from the 'X-Forwarded-Proto', 'X-Forwarded-Host' and 'X-Forwarded-Port' headers and updates the Request's Uri object.",
-            "homepage": "http://github.com/akrabat/rka-scheme-and-host-detection-middleware",
-            "keywords": [
-                "IP",
-                "middleware",
-                "psr7"
-            ],
-            "time": "2016-11-13T11:55:26+00:00"
-        },
-        {
             "name": "catfan/medoo",
-            "version": "v1.4.2",
+            "version": "v1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/catfan/Medoo.git",
-                "reference": "1134cd6372c6ec9e3ffca81335fbf04adaec4422"
+                "reference": "00b28046376880e1a7bd3026fa06b4e261bce3fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/catfan/Medoo/1134cd6372c6ec9e3ffca81335fbf04adaec4422.zip",
-                "reference": "1134cd6372c6ec9e3ffca81335fbf04adaec4422",
+                "url": "https://files.phpcomposer.com/files/catfan/Medoo/00b28046376880e1a7bd3026fa06b4e261bce3fd.zip",
+                "reference": "00b28046376880e1a7bd3026fa06b4e261bce3fd",
                 "shasum": ""
             },
             "require": {
@@ -111,7 +63,7 @@
                 "sql",
                 "sqlite"
             ],
-            "time": "2017-05-16T14:30:44+00:00"
+            "time": "2017-05-22T04:39:48+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -143,6 +95,61 @@
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
             "time": "2017-02-14T19:40:03+00:00"
+        },
+        {
+            "name": "league/plates",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/plates.git",
+                "reference": "b1684b6f127714497a0ef927ce42c0b44b45a8af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/thephpleague/plates/b1684b6f127714497a0ef927ce42c0b44b45a8af.zip",
+                "reference": "b1684b6f127714497a0ef927ce42c0b44b45a8af",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3 | ^7.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.4",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Plates\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Plates, the native PHP template system that's fast, easy to use and easy to extend.",
+            "homepage": "http://platesphp.com",
+            "keywords": [
+                "league",
+                "package",
+                "templates",
+                "templating",
+                "views"
+            ],
+            "time": "2016-12-28T00:14:17+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -402,55 +409,6 @@
                 "router"
             ],
             "time": "2017-03-19T17:55:20+00:00"
-        },
-        {
-            "name": "tuupola/slim-basic-auth",
-            "version": "2.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tuupola/slim-basic-auth.git",
-                "reference": "c61552803c91a02f27cf1c59863ef1230c8bf134"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/tuupola/slim-basic-auth/c61552803c91a02f27cf1c59863ef1230c8bf134.zip",
-                "reference": "c61552803c91a02f27cf1c59863ef1230c8bf134",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5 || ^7.0",
-                "psr/http-message": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.3",
-                "squizlabs/php_codesniffer": "^2.3",
-                "zendframework/zend-diactoros": "^1.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Slim\\Middleware\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mika Tuupola",
-                    "email": "tuupola@appelsiini.net",
-                    "homepage": "http://www.appelsiini.net/"
-                }
-            ],
-            "description": "PSR-7 HTTP Basic Authentication Middleware",
-            "homepage": "http://www.appelsiini.net/projects/slim-basic-auth",
-            "keywords": [
-                "auth",
-                "middleware",
-                "psr-7"
-            ],
-            "time": "2017-02-27T10:39:37+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

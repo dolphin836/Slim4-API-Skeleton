@@ -1,6 +1,6 @@
 # Slim-Skeleton-MVC
 
-[![Build Status](https://travis-ci.org/dolphin836/Slim-Skeleton-MVC.svg?branch=master)](https://travis-ci.org/dolphin836/Slim-Skeleton-MVC)
+<!--[![Build Status](https://travis-ci.org/dolphin836/Slim-Skeleton-MVC.svg?branch=master)](https://travis-ci.org/dolphin836/Slim-Skeleton-MVC)-->
 
 这是一个基于 Slim 的 MVC 脚手架。
 

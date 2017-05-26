@@ -3,7 +3,8 @@
 return [
     'config' => [
            'displayErrorDetails' => true,
-             'defaultController' => 'home'
+             'defaultController' => 'home',
+                      'viewPath' => APPSPATH . 'view'
     ],
 ];
 

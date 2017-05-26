@@ -21,13 +21,13 @@ class Home extends Base
     /**
     * 构造函数
     *
-    * @param interface $ci 框架
+    * @param interface $app 框架
     *
     * @return void
     **/
-    function __construct(ContainerInterface $ci)
+    function __construct(ContainerInterface $app)
     {
-        parent::__construct($ci);
+        parent::__construct($app);
     }
     /**
     * 函数说明
@@ -42,15 +42,16 @@ class Home extends Base
     {
         $data         = array('name' => 'dolphin', 'sex' => 'M');
 
-        $json         = array();
         // Librarie
         $lib_weixin   = new Weixin();
         $sign         = $lib_weixin->sign($data);
-        $json['sign'] = $sign;
+        $data['sign'] = $sign;
 
-        return $response->withStatus(200)
-            ->withHeader("Content-Type", "application/json")
-            ->write(json_encode($json));
+        // Resources
+        $data['css'][]    = 'dist/css/home.css';
+        $data['script'][] = 'dist/js/home.js';
+
+        return $this->app->view->render('home', ['data' => $data]);
     }
     /**
     * 函数说明
@@ -76,7 +77,7 @@ class Home extends Base
             $json['note'] = 'No Product By ID ' . $args['id'];
             $json['help'] = 'http://api.app.com';
         }
-
+        // Log
         $this->ci->log->write($json);
 
         return $response->withStatus(200)

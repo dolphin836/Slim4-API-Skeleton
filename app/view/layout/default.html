@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+    <head>
+        <title><?php echo $this->e($data['name']); ?></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<?php if(isset($data['css'])): ?>
+			<?php foreach ($data['css'] as $c): ?>
+            <link href="<?php echo $this->e($c); ?>" rel="stylesheet">
+			<?php endforeach; ?>
+		<?php endif; ?>
+    </head>
+    <body>
+        <div id="app">
+            <div class="content">
+                <?php echo $this->section('content'); ?>
+            </div>
+        </div>
+        <?php if(isset($data['script'])): ?>
+			<?php foreach ($data['script'] as $s): ?>
+            <script src="<?php echo $this->e($s); ?>"></script>
+			<?php endforeach; ?>
+		<?php endif; ?>
+    </body>
+</html>
