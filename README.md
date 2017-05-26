@@ -1,6 +1,8 @@
 # Slim-Skeleton-MVC
 
-<!--[![Build Status](https://travis-ci.org/dolphin836/Slim-Skeleton-MVC.svg?branch=master)](https://travis-ci.org/dolphin836/Slim-Skeleton-MVC)-->
+[![Packagist](https://img.shields.io/packagist/v/symfony/symfony.svg?style=plastic)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
+[![Packagist](https://img.shields.io/packagist/dt/doctrine/orm.svg?style=plastic)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
+[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
 
 这是一个基于 Slim 的 MVC 脚手架。
 
