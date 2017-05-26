@@ -1,8 +1,7 @@
 # Slim-Skeleton-MVC
 
-[![Packagist](https://img.shields.io/packagist/v/symfony/symfony.svg?style=plastic)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
-[![Packagist](https://img.shields.io/packagist/dt/doctrine/orm.svg?style=plastic)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
-[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
+[![GitHub stars](https://img.shields.io/github/stars/dolphin836/Slim-Skeleton-MVC.svg?style=plastic)](https://github.com/dolphin836/Slim-Skeleton-MVC/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=plastic)](https://raw.githubusercontent.com/dolphin836/Slim-Skeleton-MVC/master/LICENSE.md)
 
 这是一个基于 Slim 的 MVC 脚手架。
 
