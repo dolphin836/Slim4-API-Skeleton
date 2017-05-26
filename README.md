@@ -1,7 +1,10 @@
 # Slim-Skeleton-MVC
 
-[![GitHub stars](https://img.shields.io/github/stars/dolphin836/Slim-Skeleton-MVC.svg?style=plastic)](https://github.com/dolphin836/Slim-Skeleton-MVC/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=plastic)](https://raw.githubusercontent.com/dolphin836/Slim-Skeleton-MVC/master/LICENSE.md)
+[![Latest Stable Version](https://poser.pugx.org/dolphin836/slim-skeleton-mvc/v/stable)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
+[![Total Downloads](https://poser.pugx.org/dolphin836/slim-skeleton-mvc/downloads)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
+[![Latest Unstable Version](https://poser.pugx.org/dolphin836/slim-skeleton-mvc/v/unstable)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
+[![License](https://poser.pugx.org/dolphin836/slim-skeleton-mvc/license)](https://packagist.org/packages/dolphin836/slim-skeleton-mvc)
+
 
 这是一个基于 Slim 的 MVC 脚手架。
 
