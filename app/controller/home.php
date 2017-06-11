@@ -1,9 +1,12 @@
 <?php
 
 namespace Dolphin\Tan\Controller;
+
+use Psr\Container\ContainerInterface as ContainerInterface;
+
 use Dolphin\Tan\Librarie\Weixin as Weixin;
 use Dolphin\Tan\Model\Product as Product;
-use Psr\Container\ContainerInterface as ContainerInterface;
+
 
 /** 
 * 简单的类介绍
@@ -71,14 +74,16 @@ class Home extends Base
 
         if ($product) {
             $json['code'] = 0;
+            $json['note'] = 'Success.';
             $json['data'] = $product;
+            $json['help'] = 'http://api.app.com';
         } else {
             $json['code'] = 1;
             $json['note'] = 'No Product By ID ' . $args['id'];
             $json['help'] = 'http://api.app.com';
         }
         // Log
-        $this->ci->log->write($json);
+        $this->lib_log->write($json);
 
         return $response->withStatus(200)
             ->withHeader("Content-Type", "application/json")

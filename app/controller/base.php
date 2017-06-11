@@ -1,6 +1,7 @@
 <?php
 
 namespace Dolphin\Tan\Controller;
+use Dolphin\Tan\Librarie\Log as Log;
 use Psr\Container\ContainerInterface as ContainerInterface;
 
 /** 
@@ -16,6 +17,7 @@ use Psr\Container\ContainerInterface as ContainerInterface;
 class Base
 {
     protected $app;
+    protected $lib_log;
 
     /**
     * 构造函数
@@ -26,7 +28,8 @@ class Base
     **/
     function __construct(ContainerInterface $app)
     {
-        $this->app = $app;
+        $this->app     = $app;
+        $this->lib_log = new Log();
     }
 }
 
