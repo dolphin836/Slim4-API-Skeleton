@@ -1,8 +1,10 @@
 <?php
 
 namespace Dolphin\Tan\Controller;
-use Dolphin\Tan\Librarie\Log as Log;
+
 use Psr\Container\ContainerInterface as ContainerInterface;
+use Dolphin\Tan\Librarie\Log as Log;
+
 
 /** 
 * 简单的类介绍
@@ -18,6 +20,7 @@ class Base
 {
     protected $app;
     protected $lib_log;
+    protected $data;
 
     /**
     * 构造函数
@@ -30,6 +33,14 @@ class Base
     {
         $this->app     = $app;
         $this->lib_log = new Log();
+
+        if (getenv('APP_ENV') == 'development') { // 开发模式
+            $this->data['css'][]    = 'dist/css/weui.css';
+            $this->data['script'][] = 'dist/js/weui.js';
+        } else { // 生产环境
+            $this->data['css'][]    = 'https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css';
+            $this->data['script'][] = 'https://res.wx.qq.com/open/libs/weuijs/1.1.1/weui.min.js';
+        }
     }
 }
 

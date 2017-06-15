@@ -30,7 +30,8 @@ class Base
             'database_name' => getenv('DB_DATANAME'),
                    'server' => getenv('DB_SERVERER'),
                  'username' => getenv('DB_USERNAME'),
-                 'password' => getenv('DB_PASSWORD')
+                 'password' => getenv('DB_PASSWORD'),
+                  'charset' => 'utf8'
             ]
         );
     }
