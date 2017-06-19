@@ -1,32 +1,14 @@
 html,
 body {
-	height: 100%;
-	-webkit-tap-highlight-color: transparent;
-}
-
-body {
-	font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
-    background-color: #f8f8f8;
+    height: 100%;
 }
 
 .content {
-    max-width: 640px;
-    width: auto;
+    width: 80%;
     height: 100%;
     margin: 0 auto;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
 }
 
-ul {
-	list-style: none;
-}
-
-.link {
-	color: #09bb07;
+.text-center {
+    text-align: center;
 }

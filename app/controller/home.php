@@ -1,11 +1,9 @@
 <?php
 
 namespace Dolphin\Tan\Controller;
-
 use Psr\Container\ContainerInterface as ContainerInterface;
-
 use Dolphin\Tan\Librarie\Weixin as Lib_weixin;
-use Dolphin\Tan\Model\User as Model_user;
+use Dolphin\Tan\Model\Product as Model_product;
 
 /** 
 * 简单的类介绍
@@ -33,7 +31,7 @@ class Home extends Base
     }
     
     /**
-    * 函数说明
+    * 首页
     *
     * @param object $request  请求
     * @param object $response 响应
@@ -46,15 +44,21 @@ class Home extends Base
         // 设置页面的基本信息
         $this->data['title']       = 'Slim App';
         $this->data['keywords']    = 'Slim';
-        $this->data['description'] = 'Slim-Skeleton-MVC 是基于 Slim Framework 的脚手架。'; 
-        // 引入额外的页面资源
-        $this->data['css'][]       = 'dist/css/app.css';
+        $this->data['description'] = 'Slim-Skeleton-MVC 是基于 Slim Framework 的脚手架。';
+        // 这是一个 Library 使用的例子
+        $lib_weixin                = new Lib_weixin();
+        $this->data['sign']        = $lib_weixin->sign($this->data);
+        // 引入额外的页面资源，如果有整站共用的静态资源也可以直接在 Template 中引入
+        $this->data['css'][]       = getenv('WEB_URL') . 'dist/css/app.css';
+        $this->data['script'][]    = getenv('WEB_URL') . 'dist/js/app.js';
+
+        $this->app->log->write('Home');
 
         return $this->app->view->render('home', ['data' => $this->data]);
     }
 
     /**
-    * 如果你想要输出 JSON 格式的数据，可以参考这个例子
+    * 产品详情页
     *
     * @param object $request  请求
     * @param object $response 响应
@@ -62,30 +66,22 @@ class Home extends Base
     *
     * @return object
     **/
-    public function view($request, $response, $args)
+    public function product($request, $response, $args)
     {
-        $json             = array();
-        // Model
-        $model_user       = new Model_user();
-        $user             = $model_user->user($args['id']);
+        // 设置页面的基本信息
+        $this->data['title']       = '产品详情页 - ' . $args['id'];
+        $this->data['keywords']    = '产品详情页';
+        $this->data['description'] = '产品详情页。'; 
+        // 产品信息
+        $model_product             = new Model_product();
+        $this->data['product']     = $model_product->product($args['id']);
+        // 引入额外的页面资源，如果有整站共用的静态资源也可以直接在 Template 中引入
+        $this->data['css'][]       = getenv('WEB_URL') . 'dist/css/app.css';
+        $this->data['script'][]    = getenv('WEB_URL') . 'dist/js/app.js';
 
-        if ($user) {
-            $json['code'] = 0;
-            $json['note'] = 'Success.';
-            $json['data'] = $user;
-            $json['help'] = 'http://api.app.com';
-        } else {
-            $json['code'] = 1;
-            $json['note'] = 'No User By ID ' . $args['id'];
-            $json['help'] = 'http://api.app.com';
-        }
-        // Log
-        $this->lib_log->write($json);
+        $this->app->log->write('product - ' . $args['id']);
 
-        return $response->withStatus(200)
-            ->withHeader("Content-Type", "application/json")
-            ->write(json_encode($json));
-
+        return $this->app->view->render('product', ['data' => $this->data]);
     }
 }
 

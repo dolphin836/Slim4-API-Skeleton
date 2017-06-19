@@ -18,9 +18,7 @@
         "vlucas/phpdotenv": "^2.4",
         "catfan/Medoo": "^1.4",
         "league/plates": "^3.3",
-        "ramsey/uuid": "^3.6",
-        "filp/whoops": "^2.1",
-        "tuupola/slim-jwt-auth": "^2.3"
+        "filp/whoops": "^2.1"
     },
     "autoload-dev": {
         "psr-4": {

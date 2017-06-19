@@ -28,25 +28,7 @@
     <body>
         <div id="app">
             <div class="content">
-                <div class="weui-tab">
-                    <div class="weui-tab__panel">
-                        <?php echo $this->section('content'); ?>
-                    </div>
-                    <div class="weui-tabbar">
-                        <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
-                            <p class="weui-tabbar__label">首页</p>
-                        </a>
-                        <a href="javascript:;" class="weui-tabbar__item">
-                            <p class="weui-tabbar__label">分类</p>
-                        </a>
-                        <a href="javascript:;" class="weui-tabbar__item">
-                            <p class="weui-tabbar__label">购物车</p>
-                        </a>
-                        <a href="javascript:;" class="weui-tabbar__item">
-                            <p class="weui-tabbar__label">我的账户</p>
-                        </a>
-                    </div>
-                </div>
+                <?php echo $this->section('content'); ?>
             </div>
         </div>
         <?php if(isset($data['script'])): ?>
