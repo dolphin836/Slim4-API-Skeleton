@@ -14,8 +14,18 @@
     ],
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
+        "ext-redis": "*",
         "slim/slim": "4.*",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "slim/psr7": "^1.1",
+        "doctrine/orm": "^2.7",
+        "php-di/php-di": "^6.2",
+        "guzzlehttp/guzzle": "^7.0",
+        "php-amqplib/php-amqplib": "^2.11",
+        "monolog/monolog": "^2.1",
+        "symfony/yaml": "^5.1",
+        "lcobucci/jwt": "^4.0@alpha"
     },
     "autoload-dev": {
         "psr-4": {
@@ -24,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dolphin\\Tan\\": "app/"
+            "Dolphin\\Ting\\": "app/"
         }
     },
 	"scripts": {

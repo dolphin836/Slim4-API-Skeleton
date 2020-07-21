@@ -1,5 +1,5 @@
 /vendor/
 /.vscode/
 /.idea/
-/log/
+/var/
 .env
