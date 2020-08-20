@@ -1,12 +1,11 @@
 <?php
 
-namespace Dolphin\Ting\Http\Controller\User;
+namespace Dolphin\Ting\Http\Controller;
 
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Dolphin\Ting\Http\Constant\EntityConstant;
-use Dolphin\Ting\Http\Controller\Controller;
 use Dolphin\Ting\Http\Entity\User;
 use Dolphin\Ting\Http\Exception\CommonException;
 use Dolphin\Ting\Http\Exception\UserException;
@@ -27,10 +26,11 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function __invoke (Request $request, Response $response, $args) : Response
+    public function getUser (Request $request, Response $response, $args) : Response
     {
         // UserId
         $userId = $request->getAttribute('UserId');
+        $userId = 1;
         /** @var User $user */
         $user   = $this->loadModel('User')->getOne(EntityConstant::User, ['id' => $userId]);
         // 不存在

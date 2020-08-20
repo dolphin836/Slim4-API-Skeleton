@@ -18,16 +18,10 @@ class User
     private $username;
 
     /** @Column(type="string", length=255) */
-    private $email;
-
-    /** @Column(type="string", length=255) */
     private $password;
 
     /** @Column(type="string", length=255) */
     private $secret_key;
-
-    /** @Column(type="integer", name="is_active") */
-    private $isActive;
 
     /** @Column(type="datetime") */
     private $last_sign_in_time;
@@ -70,22 +64,6 @@ class User
     /**
      * @return mixed
      */
-    public function getEmail ()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail ($email) : void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPassword ()
     {
         return $this->password;
@@ -113,22 +91,6 @@ class User
     public function setSecretKey ($secret_key) : void
     {
         $this->secret_key = $secret_key;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getIsActive ()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param integer $isActive
-     */
-    public function setIsActive ($isActive)
-    {
-        $this->isActive = $isActive;
     }
 
     /**

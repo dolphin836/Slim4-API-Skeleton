@@ -9,6 +9,7 @@ define('ROOTPATH', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 
 define('CONFPATH', ROOTPATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
 // Config File
 $env = new Dotenv(ROOTPATH);
+$env->load();
 // Set TimeZone
 date_default_timezone_set(getenv('APP_TIMEZONE'));
 // Set Env

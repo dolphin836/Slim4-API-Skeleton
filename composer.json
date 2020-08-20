@@ -27,11 +27,6 @@
         "symfony/yaml": "^5.1",
         "lcobucci/jwt": "^4.0@alpha"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
     "autoload": {
         "psr-4": {
             "Dolphin\\Ting\\": "app/"

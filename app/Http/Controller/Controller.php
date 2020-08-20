@@ -5,12 +5,9 @@ namespace Dolphin\Ting\Http\Controller;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\ORM\EntityManager;
-use Dolphin\Ting\Bootstrap\Component\Queue;
-use Dolphin\Ting\Bootstrap\Component\Verification;
 use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
 use ReflectionClass;
-use Redis;
 
 class Controller
 {
@@ -20,24 +17,9 @@ class Controller
     protected $container;
 
     /**
-     * @var Verification
-     */
-    protected $verification;
-
-    /**
      * @var EntityManager
      */
     private $entityManager;
-
-    /**
-     * @var Queue
-     */
-    protected $mq;
-
-    /**
-     * @var Redis
-     */
-    protected $cache;
 
     /**
      * @param  Container           $container
@@ -47,14 +29,8 @@ class Controller
     public function __construct(Container $container)
     {
         $this->container     = $container;
-        // 数据校验
-        $this->verification  = $container->get('Verification');
         // Doctrine ORM
         $this->entityManager = $container->get('EntityManager');
-        // Queue
-        $this->mq            = $container->get('Queue');
-        // Cache
-        $this->cache         = $container->get('Cache');
     }
 
     /**
