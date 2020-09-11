@@ -21,10 +21,12 @@ AppFactory::setContainer($container);
 // Create App
 $app = AppFactory::create();
 // Component
-require BASEPATH . DIRECTORY_SEPARATOR . 'component.php';
+(require BASEPATH . DIRECTORY_SEPARATOR . 'component.php')($container);
 // Middleware
-require BASEPATH . DIRECTORY_SEPARATOR . 'middleware.php';
+(require BASEPATH . DIRECTORY_SEPARATOR . 'middleware.php')($app);
 // Route
-require BASEPATH . DIRECTORY_SEPARATOR . 'route.php';
+(require BASEPATH . DIRECTORY_SEPARATOR . 'route.php')($app);
 // Exception
-require BASEPATH . DIRECTORY_SEPARATOR . 'error.php';
+(require BASEPATH . DIRECTORY_SEPARATOR . 'error.php')($app);
+
+return $app;

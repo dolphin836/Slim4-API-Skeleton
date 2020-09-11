@@ -2,7 +2,7 @@
 
 namespace Dolphin\Ting\Bootstrap\Error;
 
-use Dolphin\Ting\Http\Constant\HttpResponseCodeConstant;
+use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Handlers\ErrorHandler as SlimErrorHandler;
 
@@ -20,7 +20,7 @@ class Exception extends SlimErrorHandler
             'data' => []
         ], JSON_PRETTY_PRINT);
 
-        $response = $this->responseFactory->createResponse(HttpResponseCodeConstant::HTTP_OK);
+        $response = $this->responseFactory->createResponse(StatusCodeInterface::STATUS_OK);
 
         $response->getBody()->write($content);
 

@@ -2,44 +2,45 @@
 
 namespace Dolphin\Ting\Http\Controller;
 
-use DI\DependencyException;
-use DI\NotFoundException;
+use DI\Container;
 use Doctrine\ORM\ORMInvalidArgumentException;
-use Dolphin\Ting\Http\Constant\EntityConstant;
-use Dolphin\Ting\Http\Entity\User;
+use Dolphin\Ting\Http\Business\UserBusiness;
 use Dolphin\Ting\Http\Exception\CommonException;
-use Dolphin\Ting\Http\Exception\UserException;
+use Dolphin\Ting\Http\Response\BusinessResponse;
+use Dolphin\Ting\Http\Response\UserResponse;
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 class UserController extends Controller
 {
     /**
-     * @param  Request  $request
-     * @param  Response $response
-     * @param  array    $args
+     * @var UserBusiness
+     */
+    private $userBusiness;
+
+    public function __construct(Container $container, UserBusiness $userBusiness)
+    {
+        parent::__construct($container);
+
+        $this->userBusiness = $userBusiness;
+    }
+
+    /**
+     * 查询用户信息
      *
      * @throws CommonException
      * @throws ORMInvalidArgumentException
-     * @throws DependencyException
-     * @throws NotFoundException
      *
      * @return Response
      */
-    public function getUser (Request $request, Response $response, $args) : Response
+    public function getUser () : Response
     {
-        // UserId
-        $userId = $request->getAttribute('UserId');
         $userId = 1;
-        /** @var User $user */
-        $user   = $this->loadModel('User')->getOne(EntityConstant::User, ['id' => $userId]);
-        // 不存在
-        if (empty($user)) {
-            throw new UserException('USERNAME_NON_EXIST');
-        }
-        // 输出
-        $data = $this->loadService('User')->getUserInfo($user);
+        $user   = $this->userBusiness->getUserById($userId);
 
-        return $this->respond($response, $data);
+        $userResponse = new UserResponse();
+        $userResponse->setUserId($user->getId());
+        $userResponse->setUsername($user->getUsername());
+
+        return new BusinessResponse($userResponse);
     }
 }

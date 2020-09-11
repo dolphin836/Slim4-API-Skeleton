@@ -11,7 +11,7 @@ return [
 //        Dolphin\Ting\Bootstrap\Component\Guzzle::class, // Guzzle Http Client
 //        Dolphin\Ting\Bootstrap\Component\Cache::class, // Cache
 //        Dolphin\Ting\Bootstrap\Component\Verification::class, // 数据校验
-        // Dolphin\Ting\Bootstrap\Component\Auth::class, // Auth - Json Web Tokens
-        // Dolphin\Ting\Bootstrap\Component\Queue::class // 消息队列
+//        Dolphin\Ting\Bootstrap\Component\Auth::class, // Auth - Json Web Tokens
+//        Dolphin\Ting\Bootstrap\Component\Queue::class // 消息队列
     ]
 ];
