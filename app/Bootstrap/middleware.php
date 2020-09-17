@@ -1,6 +1,6 @@
 <?php
 // Set Middleware
-use Dolphin\Ting\Http\Middleware\CORSMiddleware;
+use Dolphin\Ting\Bootstrap\Middleware\CORSMiddleware;
 
 return function ($app) {
     // Body Parsing Middleware

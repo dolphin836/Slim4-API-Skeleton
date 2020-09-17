@@ -1,13 +1,12 @@
 <?php
 
-namespace Dolphin\Ting\Http\Middleware;
+namespace Dolphin\Ting\Bootstrap\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Psr\Http\Server\MiddlewareInterface;
 use Fig\Http\Message\RequestMethodInterface;
-use Dolphin\Ting\Http\Constant\HttpResponseCodeConstant;
 
 class CORSMiddleware implements MiddlewareInterface, RequestMethodInterface
 {
@@ -28,10 +27,10 @@ class CORSMiddleware implements MiddlewareInterface, RequestMethodInterface
 
             $response = new \Slim\Psr7\Response();
 
-            return $response->withStatus(HttpResponseCodeConstant::HTTP_NO_CONTENT)
+            return $response->withStatus(204)
                             ->withHeader('Access-Control-Allow-Origin', '*')
                             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-                            ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+                            ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
                             ->withHeader('Content-Type', 'application/json');
         }
 

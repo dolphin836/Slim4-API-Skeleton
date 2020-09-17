@@ -1,4 +1,8 @@
-userInfo:
-  method    : GET
+user:
+  method    : POST
   path      : /user
   controller: Dolphin\Ting\Http\Controller\UserController:getUser
+userList:
+  method    : POST
+  path      : /users
+  controller: Dolphin\Ting\Http\Controller\UserController:getUserList

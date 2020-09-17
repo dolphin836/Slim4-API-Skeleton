@@ -5,7 +5,7 @@ use Slim\Factory\AppFactory;
 use Dotenv\Dotenv;
 // 定义目录
 define('BASEPATH', __DIR__);
-define('ROOTPATH', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+define('ROOTPATH', __DIR__  . DIRECTORY_SEPARATOR . '..'     . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 define('CONFPATH', ROOTPATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
 // Config File
 $env = new Dotenv(ROOTPATH);

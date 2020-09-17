@@ -24,8 +24,7 @@
         "guzzlehttp/guzzle": "^7.0",
         "php-amqplib/php-amqplib": "^2.11",
         "monolog/monolog": "^2.1",
-        "symfony/yaml": "^5.1",
-        "lcobucci/jwt": "^4.0@alpha"
+        "symfony/yaml": "^5.1"
     },
     "autoload": {
         "psr-4": {

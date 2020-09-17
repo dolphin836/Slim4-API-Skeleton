@@ -3,12 +3,13 @@
 namespace Dolphin\Ting\Http\Controller;
 
 use DI\Container;
-use Doctrine\ORM\ORMInvalidArgumentException;
 use Dolphin\Ting\Http\Business\UserBusiness;
-use Dolphin\Ting\Http\Exception\CommonException;
+use Dolphin\Ting\Http\Request\UserIdRequest;
 use Dolphin\Ting\Http\Response\BusinessResponse;
-use Dolphin\Ting\Http\Response\UserResponse;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Dolphin\Ting\Http\Exception\UserException;
+use Dolphin\Ting\Http\Exception\CommonException;
 
 class UserController extends Controller
 {
@@ -25,22 +26,31 @@ class UserController extends Controller
     }
 
     /**
-     * 查询用户信息
+     * 用户信息
      *
+     * @param  Request $request
+     *
+     * @return Response
+     *
+     * @throws UserException
      * @throws CommonException
-     * @throws ORMInvalidArgumentException
+     */
+    public function getUser (Request $request) : Response
+    {
+        $data = $this->userBusiness->getUserById(new UserIdRequest($request));
+
+        return new BusinessResponse($data);
+    }
+
+    /**
+     * 查询用户列表
      *
      * @return Response
      */
-    public function getUser () : Response
+    public function getUserList () : Response
     {
-        $userId = 1;
-        $user   = $this->userBusiness->getUserById($userId);
+        $data = $this->userBusiness->getUserList();
 
-        $userResponse = new UserResponse();
-        $userResponse->setUserId($user->getId());
-        $userResponse->setUsername($user->getUsername());
-
-        return new BusinessResponse($userResponse);
+        return new BusinessResponse($data);
     }
 }

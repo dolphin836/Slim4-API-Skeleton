@@ -2,10 +2,11 @@
 
 namespace Dolphin\Ting\Http\Business;
 
-use Dolphin\Ting\Http\Constant\EntityConstant;
-use Dolphin\Ting\Http\Entity\User;
 use Dolphin\Ting\Http\Exception\UserException;
 use Dolphin\Ting\Http\Model\UserModel;
+use Dolphin\Ting\Http\Request\UserIdRequest;
+use Dolphin\Ting\Http\Response\UserListResponse;
+use Dolphin\Ting\Http\Response\UserResponse;
 
 class UserBusiness
 {
@@ -17,24 +18,56 @@ class UserBusiness
     }
 
     /**
-     * @param  $userId
+     * @param  UserIdRequest $request
      *
      * @throws UserException
      *
-     * @return User
+     * @return UserResponse
      *
      * @author wanghaibing
      * @date   2020/8/21 9:32
      */
-    public function getUserById ($userId)
+    public function getUserById (UserIdRequest $request)
     {
-        /** @var User $user */
-        $user = $this->userModel->getOne(EntityConstant::User, ['id' => $userId]);
+        $userId = $request->getUserId();
+        $user   = $this->userModel->getUserById($userId);
         // 不存在
         if (empty($user)) {
             throw new UserException('USERNAME_NON_EXIST');
         }
 
-        return $user;
+        $userResponse = new UserResponse();
+        $userResponse->setUserId($user->getId());
+        $userResponse->setUsername($user->getUsername());
+
+        return $userResponse;
+    }
+
+    /**
+     * 用户列表
+     *
+     * @return UserListResponse
+     * @author wanghaibing
+     * @date   2020/9/14 14:40
+     */
+    public function getUserList ()
+    {
+        $userList = $this->userModel->getUserList();
+
+        $userArr  = [];
+
+        foreach ($userList as $user) {
+            $userResponse = new UserResponse();
+            $userResponse->setUserId($user->getId());
+            $userResponse->setUsername($user->getUsername());
+
+            $userArr[] = $userResponse;
+        }
+
+        $userListResponse = new UserListResponse();
+        $userListResponse->setUser($userArr);
+        $userListResponse->setTotal(1);
+
+        return $userListResponse;
     }
 }
