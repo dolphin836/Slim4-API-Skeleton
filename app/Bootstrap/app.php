@@ -29,4 +29,7 @@ $app = AppFactory::create();
 // Exception
 (require BASEPATH . DIRECTORY_SEPARATOR . 'error.php')($app);
 
-return $app;
+return [
+         'app' => $app,
+    'container' => $container
+];

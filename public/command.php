@@ -2,15 +2,15 @@
 <?php
 // Autoload
 require __DIR__ . '/../vendor/autoload.php';
+// Bootstrap
+$container = (require __DIR__ . '/../app/Bootstrap/app.php')['container'];
 
 use Symfony\Component\Console\Application;
+use Dolphin\Ting\Http\Command\GenerateRandomUserCommand;
 
 $application = new Application();
-$commandMap  = require __DIR__ . '/../config/command.php';
 // 注册命令
-foreach ($commandMap as $command) {
-    call_user_func([$application, 'add'], new $command);
-}
+$application->add(new GenerateRandomUserCommand($container));
 
 try {
     $application->run();
