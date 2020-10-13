@@ -12,7 +12,7 @@ return function (Container $container) {
             'log'      => require CONFPATH . 'log.php',
             'database' => require CONFPATH . 'database.php',
             'cache'    => require CONFPATH . 'cache.php',
-            'mq'       => require CONFPATH . 'mq.php',
+            'queue'    => require CONFPATH . 'queue.php',
             'mail'     => require CONFPATH . 'mail.php'
         ];
     });

@@ -1,8 +1,8 @@
 <?php
 // Autoload
-require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 // Bootstrap
-require __DIR__ . '/../../app/Bootstrap/app.php';
+$container = (require __DIR__ . '/../app/Bootstrap/app.php')['container'];
 // 命令行参数数量错误
 if ($argc < 2) {
     exit("Command Error: Process Name Is Empty.");

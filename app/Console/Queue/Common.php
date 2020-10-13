@@ -3,6 +3,7 @@
 namespace Dolphin\Ting\Console\Queue;
 
 use DI\Container;
+use Doctrine\ORM\EntityManager;
 use Exception;
 use Dolphin\Ting\Bootstrap\Component\Queue;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -11,39 +12,35 @@ use PhpAmqpLib\Channel\AMQPChannel;
 abstract class Common
 {
     /**
-     * @var string 虚拟主机
+     * @var EntityManager
      */
-    protected $virtualHost;
-
-    /**
-     * @var string 交换机
-     */
-    protected $exchange;
-
-    /**
-     * @var string 队列
-     */
-    protected $queue;
+    private $entityManager;
 
     /**
      * Queue constructor.
      *
      * @param Container $container
-     * @param Config    $config
+     * @param string    $virtualHost
+     * @param string    $queueName
      */
-    public function __construct (Container $container, Config $config)
+    public function __construct (Container $container, $virtualHost, $queueName)
     {
         try {
-            /** @var Queue $mq */
-            $mq = $container->get('Queue');
-            $mq->connection($config->getVirtualHost());
-            $mq->receive($config->getQueue(), function ($message) {
+            $this->entityManager = $container->get('EntityManager');
+            /** @var Queue $queue */
+            $queue = $container->get('Queue');
+            // 连接 MQ
+            $queue->connection($virtualHost);
+            // 数据库心跳检测
+            $this->keepConnection();
+            //
+            $queue->receive($queueName, function ($message) {
                 $this->callback($message);
                 $this->ack($message);
                 $this->exit($message);
             });
         } catch (Exception $e) {
-            echo $e->getMessage() . PHP_EOL;
+            echo 'RabbitMQ Error:' . $e->getMessage() . PHP_EOL;
         }
     }
 
@@ -57,6 +54,8 @@ abstract class Common
         $channel = $message->delivery_info['channel'];
 
         $channel->basic_ack($message->delivery_info['delivery_tag']);
+
+        echo 'RabbitMQ Ack.' . PHP_EOL;
     }
 
     /**
@@ -70,6 +69,23 @@ abstract class Common
             $channel = $message->delivery_info['channel'];
 
             $channel->basic_cancel($message->delivery_info['consumer_tag']);
+
+            echo 'RabbitMQ Quit.' . PHP_EOL;
+
+            exit();
+        }
+    }
+
+    /**
+     * 数据库自动重连
+     */
+    private function keepConnection ()
+    {
+        $isConnection = $this->entityManager->getConnection()->ping();
+
+        if (! $isConnection) {
+            $this->entityManager->getConnection()->close();
+            $this->entityManager->getConnection()->connect();
         }
     }
 
