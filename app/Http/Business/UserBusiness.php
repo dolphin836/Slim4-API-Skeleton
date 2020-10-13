@@ -118,7 +118,7 @@ class UserBusiness
 
         try {
             // 更新最后登录时间
-            $user->setLastSignInTime(new DateTime());
+            $user->setLastSignInTime(date('Y-m-d H:i:s'));
 
             $this->userModel->save($user);
             // 添加登录记录
@@ -126,7 +126,7 @@ class UserBusiness
             $userSignIn = new UserSignIn();
             $userSignIn->setUserId($userId);
             $userSignIn->setIpAddress('127.0.0.1');
-            $userSignIn->setSignInTime(new DateTime());
+            $userSignIn->setSignInTime(date('Y-m-d H:i:s'));
 
             $this->userSignInModel->save($userSignIn);
             // 提交事务

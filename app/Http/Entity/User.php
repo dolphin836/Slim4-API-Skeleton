@@ -2,8 +2,6 @@
 // 用户信息
 namespace Dolphin\Ting\Http\Entity;
 
-use DateTime;
-
 /** @Entity @Table(name="user") */
 class User
 {
@@ -20,19 +18,19 @@ class User
     /** @Column(type="string", length=255) */
     private $password;
 
-    /** @Column(type="datetime") */
+    /** @Column(type="string") */
     private $last_sign_in_time;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId ()
+    public function getId () : int
     {
         return $this->id;
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId ($id) : void
     {
@@ -40,15 +38,15 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUsername ()
+    public function getUsername () : string
     {
         return $this->username;
     }
 
     /**
-     * @param mixed $username
+     * @param string $username
      */
     public function setUsername ($username) : void
     {
@@ -56,9 +54,9 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getPassword ()
+    public function getPassword () : string
     {
         return $this->password;
     }
@@ -72,15 +70,15 @@ class User
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getLastSignInTime ()
+    public function getLastSignInTime () : string
     {
         return $this->last_sign_in_time;
     }
 
     /**
-     * @param DateTime $last_sign_in_time
+     * @param string $last_sign_in_time
      */
     public function setLastSignInTime ($last_sign_in_time) : void
     {

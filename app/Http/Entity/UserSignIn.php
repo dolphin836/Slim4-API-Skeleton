@@ -2,8 +2,6 @@
 // 用户登录记录
 namespace Dolphin\Ting\Http\Entity;
 
-use DateTime;
-
 /** @Entity @Table(name="user_sign_in") */
 class UserSignIn
 {
@@ -20,19 +18,19 @@ class UserSignIn
     /** @Column(type="string", length=255) */
     private $ip_address;
 
-    /** @Column(type="datetime") */
+    /** @Column(type="string") */
     private $sign_in_time;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id): void
     {
@@ -40,15 +38,15 @@ class UserSignIn
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getUserId()
+    public function getUserId() : int
     {
         return $this->user_id;
     }
 
     /**
-     * @param mixed $user_id
+     * @param int $user_id
      */
     public function setUserId($user_id): void
     {
@@ -56,9 +54,9 @@ class UserSignIn
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getIpAddress()
+    public function getIpAddress() : string
     {
         return $this->ip_address;
     }
@@ -72,15 +70,15 @@ class UserSignIn
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getSignInTime()
+    public function getSignInTime() : string
     {
         return $this->sign_in_time;
     }
 
     /**
-     * @param DateTime $sign_in_time
+     * @param string $sign_in_time
      */
     public function setSignInTime($sign_in_time): void
     {

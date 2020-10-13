@@ -29,6 +29,10 @@ class EntityManager implements ComponentInterface
             $isProduction = ENV === 'production';
             // 创建 ORM 配置
             $entityManagerConfig = Setup::createAnnotationMetadataConfiguration([], ! $isProduction);
+            // 非生产环境记录 SQL 日志
+            if (! $isProduction) {
+                $entityManagerConfig->setSQLLogger(new DoctrineLogger($container));
+            }
 
             return ORMEntityManager::create($pdoDriver, $entityManagerConfig);
         });
