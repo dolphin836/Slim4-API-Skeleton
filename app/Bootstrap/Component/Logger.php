@@ -3,6 +3,7 @@
 namespace Dolphin\Ting\Bootstrap\Component;
 
 use DI\Container;
+use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger as MonoLog;
 use Monolog\Processor\UidProcessor;
@@ -36,6 +37,13 @@ class Logger implements ComponentInterface
             $logFileName  = __DIR__ . '/../../..' . $config['path'] . '/' . date('Y') . '/' . date('m') . '/' . date('Ymd') . '.log';
             // 初始化
             $logHandler   = new StreamHandler($logFileName, $minLogLevel);
+            // 日期格式
+            $dateFormat   = "Y-m-d H:i:s";
+            // 默认格式是 "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n"
+            $output       = "[%datetime%] %channel%.%level_name%: %message%\n";
+            $formatter    = new LineFormatter($output, $dateFormat);
+            $logHandler->setFormatter($formatter);
+
             $logger->pushHandler($logHandler);
 
             return $logger;
