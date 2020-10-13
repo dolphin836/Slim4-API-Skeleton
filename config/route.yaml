@@ -6,3 +6,7 @@ userList:
   method    : POST
   path      : /users
   controller: Dolphin\Ting\Http\Controller\UserController:getUserList
+userSignIn:
+  method    : POST
+  path      : /signin
+  controller: Dolphin\Ting\Http\Controller\UserController:signIn

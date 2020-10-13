@@ -15,6 +15,6 @@ $application->add(new GenerateRandomUserCommand($container));
 try {
     $application->run();
 } catch (Exception $e) {
-
+    echo $e->getMessage();
 }
 

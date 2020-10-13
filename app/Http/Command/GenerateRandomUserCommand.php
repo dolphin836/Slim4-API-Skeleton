@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Psr\Container\ContainerInterface as Container;
+use DateTime;
 
 class GenerateRandomUserCommand extends Command
 {
@@ -55,10 +56,9 @@ class GenerateRandomUserCommand extends Command
         $user     = new User();
         $user->setUsername($username);
         $user->setPassword(UserConstant::DEFAULT_PASSWORD);
-        $user->setSecretKey('');
+        $user->setLastSignInTime(new DateTime());
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+        $entityManager->save($user);
 
         return $username;
     }

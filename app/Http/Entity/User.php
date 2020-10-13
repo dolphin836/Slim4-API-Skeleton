@@ -1,5 +1,5 @@
 <?php
-
+// 用户信息
 namespace Dolphin\Ting\Http\Entity;
 
 use DateTime;
@@ -20,14 +20,8 @@ class User
     /** @Column(type="string", length=255) */
     private $password;
 
-    /** @Column(type="string", length=255) */
-    private $secret_key;
-
     /** @Column(type="datetime") */
     private $last_sign_in_time;
-
-    /** @Column(type="datetime") */
-    private $last_update_time;
 
     /**
      * @return mixed
@@ -78,22 +72,6 @@ class User
     }
 
     /**
-     * @return mixed
-     */
-    public function getSecretKey ()
-    {
-        return $this->secret_key;
-    }
-
-    /**
-     * @param mixed $secret_key
-     */
-    public function setSecretKey ($secret_key) : void
-    {
-        $this->secret_key = $secret_key;
-    }
-
-    /**
      * @return DateTime
      */
     public function getLastSignInTime ()
@@ -102,26 +80,10 @@ class User
     }
 
     /**
-     * @param mixed $last_sign_in_time
+     * @param DateTime $last_sign_in_time
      */
     public function setLastSignInTime ($last_sign_in_time) : void
     {
         $this->last_sign_in_time = $last_sign_in_time;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getLastUpdateTime ()
-    {
-        return $this->last_update_time;
-    }
-
-    /**
-     * @param mixed $last_update_time
-     */
-    public function setLastUpdateTime ($last_update_time) : void
-    {
-        $this->last_update_time = $last_update_time;
     }
 }

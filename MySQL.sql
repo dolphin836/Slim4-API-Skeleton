@@ -1,0 +1,17 @@
+CREATE TABLE `user` (
+    `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '用户名',
+    `password` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '密码',
+    `last_sign_in_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后登录时间',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+
+CREATE TABLE `user_sign_in` (
+    `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户',
+    `ip_address` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'IP 地址',
+    `sign_in_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登录时间',
+    PRIMARY KEY (`id`),
+    KEY `idx_user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录记录表';
