@@ -19,13 +19,18 @@ composer create-project dolphin836/slim-skeleton-mvc [slim-app]
 将 .env.example 重命名为 .env，然后填写相应的信息。
 
 ```bash
-ENV=dev                     # 当前环境：dev - 开发、test - 测试、production - 生产
-APP_TIMEZONE=Asia/Shanghai  # 时区
-WEB_URL=http://app.hbdx.cc/ # 应用地址，必须带反斜杠
-DB_SERVERER=localhost       # 数据库服务器
-DB_USERNAME=root"           # 数据用户名
-DB_PASSWORD=                # 数据库用户密码
-DB_DATANAME=                # 数据库名称
+# 当前环境：dev - 开发、test - 测试、production - 生产
+ENV=dev
+# 时区
+TIMEZONE=Asia/Shanghai
+# 数据库服务器地址
+DB_SERVERER=localhost
+# 数据用户名
+DB_USERNAME=root
+# 数据库用户密码
+DB_PASSWORD=password
+# 数据吗名称
+DB_DATANAME=app
 ```
 
 #### 使用方法

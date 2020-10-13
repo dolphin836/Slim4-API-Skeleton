@@ -11,7 +11,7 @@ define('CONFPATH', ROOTPATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARAT
 $env = new Dotenv(ROOTPATH);
 $env->load();
 // Set TimeZone
-date_default_timezone_set(getenv('APP_TIMEZONE'));
+date_default_timezone_set(getenv('TIMEZONE'));
 // Set Env
 define('ENV', getenv("ENV"));
 // Create Container
