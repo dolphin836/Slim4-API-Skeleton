@@ -1,9 +1,9 @@
 {
-    "name": "dolphin836/slim-skeleton-mvc",
-    "description": "基于 Slim 框架的 MVC 脚手架。",
+    "name": "dolphin836/slim4-api-skeleton",
+    "description": "基于 Slim 框架的 API 脚手架。",
     "keywords": ["Slim", "脚手架", "MVC"],
     "type": "project",
-    "homepage": "https://github.com/dolphin836/Slim-Skeleton-MVC",
+    "homepage": "https://github.com/dolphin836/Slim4-API-Skeleton",
     "license": "MIT",
     "authors": [
         {
