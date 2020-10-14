@@ -7,7 +7,7 @@ Slim-Skeleton-MVC 是基于 Slim Framework 的脚手架。其主体框架来源�
 使用 Composer 快速创建项目
 
 ```bash
-composer create-project dolphin836/slim-skeleton-mvc [slim-app]
+composer create-project dolphin836/slim4-api-skeleton [app-name]
 ```
 
 #### 配置 WEB 服务器
