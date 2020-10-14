@@ -68,8 +68,8 @@ class Queue implements ComponentInterface
     /**
      * 连接
      *
-     * @param  string $virtualHost Virtual Host Name
-     * @param  boolean $isConfirm 是否确认回调
+     * @param  string  $virtualHost Virtual Host Name
+     * @param  boolean $isConfirm   是否确认回调
      *
      * @return Queue
      *

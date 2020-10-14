@@ -1,6 +1,6 @@
 <?php
 // MQ 消费者基础类，其他任务继承此类，并实现 callback 方法
-namespace Dolphin\Ting\Console\Queue;
+namespace Dolphin\Ting\Http\Queue;
 
 use DI\Container;
 use Doctrine\ORM\EntityManager;
@@ -17,25 +17,39 @@ abstract class Common
     private $entityManager;
 
     /**
+     * 虚拟主机
+     *
+     * @var string
+     */
+    protected $virtualHost;
+
+    /**
+     * 队列
+     *
+     * @var string
+     */
+    protected $queueName;
+
+    /**
      * Queue constructor.
      *
      * @param Container $container
-     * @param string    $virtualHost
-     * @param string    $queueName
      */
-    public function __construct (Container $container, $virtualHost, $queueName)
+    public function __construct (Container $container)
     {
         try {
             $this->entityManager = $container->get('EntityManager');
             /** @var Queue $queue */
             $queue = $container->get('Queue');
             // 连接 MQ
-            $queue->connection($virtualHost);
+            $queue->connection($this->virtualHost);
             // 数据库心跳检测
             $this->keepConnection();
             //
-            $queue->receive($queueName, function ($message) {
-                $this->callback($message);
+            $queue->receive($this->queueName, function ($message) {
+                if ($this->isJsonMessage($message)) {
+                    $this->callback($message);
+                }
                 $this->ack($message);
                 $this->exit($message);
             });
@@ -46,6 +60,7 @@ abstract class Common
 
     /**
      * 通用 ACK 方法
+     *
      * @param AMQPMessage $message
      */
     private function ack ($message)
@@ -60,6 +75,7 @@ abstract class Common
 
     /**
      * 通用退出脚本方法
+     *
      * @param AMQPMessage $message
      */
     private function exit ($message)
@@ -90,8 +106,32 @@ abstract class Common
     }
 
     /**
+     * 校验消息格式
+     *
+     * @param  AMQPMessage $message
+     * @return bool
+     */
+    private function isJsonMessage ($message)
+    {
+        $json = $message->getBody();
+        // 打印消息
+        echo 'RabbitMQ Message:' . $json . PHP_EOL;
+        // 转数组
+        $data = json_decode($json, true);
+        // 非法格式
+        if (! is_array($data) || json_last_error() !== JSON_ERROR_NONE) {
+            echo 'RabbitMQ Message Not Json.' . PHP_EOL;
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * 定义回调方法
-     * @param string $message
+     *
+     * @param AMQPMessage $message
      */
     abstract public function callback ($message);
 }

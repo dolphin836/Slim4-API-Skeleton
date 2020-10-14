@@ -7,16 +7,9 @@ $container = (require __DIR__ . '/../app/Bootstrap/app.php')['container'];
 if ($argc < 2) {
     exit("Command Error: Process Name Is Empty.");
 }
-// 接口命令行参数，得到任务名称
-$processNameText = $argv[1];
-$processNameArr  = explode('=', $processNameText);
-
-if (count($processNameArr) < 2 || empty($processNameArr[1])) {
-    exit("Command Error: Process Name Is Empty.");
-}
 // 首字母大写
-$processName = ucfirst($processNameArr[1]);
-$className   = 'Dolphin\\Ting\\Console\\Queue\\' . $processName;
+$processName = ucfirst($argv[1]);
+$className   = 'Dolphin\\Ting\\Http\\Queue\\' . $processName;
 // 判断类是否存在
 if (! class_exists($className)) {
     exit("Command Error: Process Non Existed.");

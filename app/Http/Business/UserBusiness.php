@@ -4,6 +4,8 @@ namespace Dolphin\Ting\Http\Business;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Dolphin\Ting\Bootstrap\Component\Queue;
+use Dolphin\Ting\Http\Constant\QueueConstant;
 use Dolphin\Ting\Http\Entity\UserSignIn;
 use Dolphin\Ting\Http\Exception\DBException;
 use Dolphin\Ting\Http\Exception\UserException;
@@ -14,16 +16,30 @@ use Dolphin\Ting\Http\Request\UserRequest;
 use Dolphin\Ting\Http\Response\UserListResponse;
 use Dolphin\Ting\Http\Response\UserResponse;
 use Exception;
+use Psr\Container\ContainerInterface as Container;
 
 class UserBusiness
 {
+    /**
+     * @var Queue
+     */
+    private $queue;
+
+    /**
+     * @var UserModel
+     */
     private $userModel;
 
+    /**
+     * @var UserSignInModel
+     */
     private $userSignInModel;
 
-    public function __construct (UserModel $userModel, UserSignInModel $userSignInModel)
+    public function __construct (Container $container, UserModel $userModel, UserSignInModel $userSignInModel)
     {
-        $this->userModel      = $userModel;
+        $this->queue           = $container->get('Queue');
+
+        $this->userModel       = $userModel;
 
         $this->userSignInModel = $userSignInModel;
     }
@@ -96,6 +112,7 @@ class UserBusiness
      *
      * @throws UserException
      * @throws DBException
+     * @throws Exception
      *
      * @author wanghaibing
      * @date   2020/10/13 12:10
@@ -112,6 +129,8 @@ class UserBusiness
         } catch (NonUniqueResultException $e) {
             throw new DBException($e);
         }
+        // UserId
+        $userId = $user->getId();
         // 开启事务
         $this->userModel->beginTransaction();
 
@@ -121,7 +140,6 @@ class UserBusiness
 
             $this->userModel->save($user);
             // 添加登录记录
-            $userId     = $user->getId();
             $userSignIn = new UserSignIn();
             $userSignIn->setUserId($userId);
             $userSignIn->setIpAddress('127.0.0.1');
@@ -134,5 +152,12 @@ class UserBusiness
             // 回滚事务
             $this->userModel->rollback();
         }
+        // 发送 MQ 消息
+        $message = [
+            'user_id' => $userId
+        ];
+
+        $this->queue->connection(QueueConstant::VIRTUAL_HOST_DEFAULT);
+        $this->queue->send(json_encode($message), QueueConstant::EXCHANGE_DEFAULT);
     }
 }
