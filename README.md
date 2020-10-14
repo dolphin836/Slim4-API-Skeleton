@@ -57,4 +57,3 @@ $ php public/command.php generate-random-user 1
 - 测试用例
 - 持续集成
 - 自动文档
-- 其他
