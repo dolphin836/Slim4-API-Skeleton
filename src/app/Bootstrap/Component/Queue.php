@@ -22,22 +22,22 @@ class Queue implements ComponentInterface
     /**
      * @var array 服务器配置信息
      */
-    private $config;
+    private array $config;
 
     /**
      * @var AMQPStreamConnection
      */
-    private $connection;
+    private AMQPStreamConnection $connection;
 
     /**
      * @var AMQPChannel
      */
-    private $channel;
+    private AMQPChannel $channel;
 
     /**
      * @var boolean
      */
-    private $isConfirm;
+    private bool $isConfirm;
 
     /**
      * Queue constructor.
@@ -47,7 +47,7 @@ class Queue implements ComponentInterface
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function __construct (Container $app)
+    public function __construct(Container $app)
     {
         // 服务器配置信息
         $this->config = $app->get('Config')['queue'];
@@ -58,7 +58,7 @@ class Queue implements ComponentInterface
      *
      * @param Container $container
      */
-    public static function register (Container $container)
+    public static function register(Container $container)
     {
         $container->set('Queue', function () use ($container) {
             return new Queue($container);
@@ -68,14 +68,14 @@ class Queue implements ComponentInterface
     /**
      * 连接
      *
-     * @param  string  $virtualHost Virtual Host Name
-     * @param  boolean $isConfirm   是否确认回调
+     * @param string $virtualHost Virtual Host Name
+     * @param boolean $isConfirm   是否确认回调
      *
      * @return Queue
      *
      * @throws Exception
      */
-    public function connection ($virtualHost, $isConfirm = false)
+    public function connection(string $virtualHost, bool $isConfirm): static
     {
         $this->connection = new AMQPStreamConnection(
             $this->config['host'],
@@ -113,13 +113,13 @@ class Queue implements ComponentInterface
     /**
      * 发送消息
      *
-     * @param  string       $json     消息
-     * @param  string       $exchange 交换机
-     * @param  Closure|null $callback 成功确认回调
+     * @param string $json     消息
+     * @param string $exchange 交换机
+     * @param Closure|null $callback 成功确认回调
      *
      * @throws Exception
      */
-    public function send ($json, $exchange, $callback = null)
+    public function send(string $json, string $exchange, Closure $callback = null)
     {
         $message = new AMQPMessage($json, [
             'content_type'  => 'application/json',
@@ -140,7 +140,7 @@ class Queue implements ComponentInterface
             // 等待服务端确认
             $this->isConfirm && $this->channel->wait_for_pending_acks();
         } catch (Exception $e) {
-
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -150,9 +150,9 @@ class Queue implements ComponentInterface
      *
      * @throws ErrorException
      */
-    public function receive ($queue, $callback)
+    public function receive(string $queue, Closure $callback)
     {
-        if (! is_callable($callback) || ! ($callback instanceof Closure)) {
+        if (! is_callable($callback)) {
             $callback = function () {
                 echo 'RabbitMQ Receive Callback Empty.:' . PHP_EOL;
             };
@@ -169,7 +169,7 @@ class Queue implements ComponentInterface
      * 关闭链接
      * @throws Exception
      */
-    public function shutdown ()
+    public function shutdown()
     {
         if (! $this->connection || ! $this->channel) {
             throw new Exception('Connection Fail.');

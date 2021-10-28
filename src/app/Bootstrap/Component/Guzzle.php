@@ -17,7 +17,7 @@ class Guzzle implements ComponentInterface
      *
      * @param Container $container
      */
-    public static function register (Container $container)
+    public static function register(Container $container)
     {
         $container->set('Guzzle', function () use ($container) {
             return new Client();

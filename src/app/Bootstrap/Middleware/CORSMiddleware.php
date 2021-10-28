@@ -34,8 +34,6 @@ class CORSMiddleware implements MiddlewareInterface, RequestMethodInterface
                             ->withHeader('Content-Type', 'application/json');
         }
 
-        $response = $handler->handle($request);
-
-        return $response;
+        return $handler->handle($request);
     }
 }

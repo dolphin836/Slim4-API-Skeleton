@@ -10,17 +10,17 @@ class Error
     /**
      * @var Request
      */
-    private $request;
+    private Request $request;
 
     /**
      * @var Exception
      */
-    private $exception;
+    private Exception $exception;
 
     /**
      * @var bool
      */
-    private $isProduction;
+    private bool $isProduction;
 
     // 系统错误类型定义
     const ERROR_TYPE = [

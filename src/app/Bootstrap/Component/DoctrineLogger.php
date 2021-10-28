@@ -12,12 +12,12 @@ class DoctrineLogger implements SQLLogger
     /**
      * @var Logger
      */
-    private $logger;
+    private mixed $logger;
 
     /**
      * @var string[]
      */
-    private $type = [
+    private array $type = [
         'SELECT',
         'UPDATE',
         'INSERT',
@@ -33,9 +33,9 @@ class DoctrineLogger implements SQLLogger
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function __construct (Container $container)
+    public function __construct(Container $container)
     {
-        $this->logger   = $container->get('Logger');
+        $this->logger = $container->get('Logger');
     }
 
     /**
@@ -75,17 +75,17 @@ class DoctrineLogger implements SQLLogger
     /**
      * 判断是否为允许的类型
      *
-     * @param  string $sql
+     * @param string $sql
      *
      * @return boolean
      *
      * @author wanghaibing
      * @date   2020/10/13 15:41
      */
-    private function isType ($sql)
+    private function isType(string $sql): bool
     {
         foreach ($this->type as $type) {
-            if (strpos($sql, $type) === 0) {
+            if (str_starts_with($sql, $type)) {
                 return true;
             }
         }

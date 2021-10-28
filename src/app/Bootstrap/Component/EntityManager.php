@@ -19,7 +19,7 @@ class EntityManager implements ComponentInterface
      *
      * @param Container $container
      */
-    public static function register (Container $container)
+    public static function register(Container $container)
     {
         $container->set('EntityManager', function () use ($container) {
             // 数据库配置

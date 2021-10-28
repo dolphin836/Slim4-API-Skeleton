@@ -1,17 +1,42 @@
+SET time_zone = "+08:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- 数据库： `app`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表结构 `user`
+--
+
 CREATE TABLE `user` (
     `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '用户名',
     `password` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '密码',
     `last_sign_in_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后登录时间',
+    `insert_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `last_update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `uk_username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+
+--
+-- 表结构 `user_sign_in`
+--
 
 CREATE TABLE `user_sign_in` (
     `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户',
     `ip_address` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'IP 地址',
     `sign_in_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登录时间',
+    `insert_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `last_update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     KEY `idx_user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录记录表';

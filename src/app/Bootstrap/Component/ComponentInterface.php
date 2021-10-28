@@ -8,8 +8,7 @@ interface ComponentInterface
 {
     /**
      * 组件注册方法
-     * @param  Container $container
-     * @return mixed
+     * @param Container $container
      */
-    public static function register (Container $container);
+    public static function register(Container $container);
 }

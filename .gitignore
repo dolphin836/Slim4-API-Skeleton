@@ -4,4 +4,5 @@
 /src/.env
 /nginx/log
 /mysql/log
+/.idea
 .env

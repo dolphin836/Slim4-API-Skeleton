@@ -7,9 +7,9 @@ use Slim\ResponseEmitter as SlimResponseEmitter;
 
 class Response extends SlimResponseEmitter
 {
-    public function respond (ResponseInterface $response): void
+    public function respond(ResponseInterface $response): void
     {
-        $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
         $response = $response->withHeader('Access-Control-Allow-Credentials', 'true')
                              ->withHeader('Access-Control-Allow-Origin', $origin)

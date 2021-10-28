@@ -10,3 +10,7 @@ userSignIn:
   method    : POST
   path      : /signin
   controller: Dolphin\Ting\Http\Controller\UserController:signIn
+userSignUp:
+  method    : POST
+  path      : /signup
+  controller: Dolphin\Ting\Http\Controller\UserController:signup

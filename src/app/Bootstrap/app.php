@@ -4,9 +4,9 @@ use DI\Container;
 use Slim\Factory\AppFactory;
 use Dotenv\Dotenv;
 // 定义目录
-define('BASEPATH', __DIR__);
-define('ROOTPATH', __DIR__  . DIRECTORY_SEPARATOR . '..'     . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
-define('CONFPATH', ROOTPATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
+const BASEPATH = __DIR__;
+const ROOTPATH = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+const CONFPATH = ROOTPATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR;
 // Config File
 $env = new Dotenv(ROOTPATH);
 $env->load();
@@ -30,6 +30,6 @@ $app = AppFactory::create();
 (require BASEPATH . DIRECTORY_SEPARATOR . 'error.php')($app);
 
 return [
-         'app' => $app,
+          'app' => $app,
     'container' => $container
 ];

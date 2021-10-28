@@ -23,7 +23,7 @@ class Logger implements ComponentInterface
      *
      * @throws Exception
      */
-    public static function register (Container $container)
+    public static function register(Container $container)
     {
         $container->set('Logger', function () use ($container) {
             // 日志配置
