@@ -1,0 +1,19 @@
+; 错误处理
+error_reporting = E_ALL
+display_errors = On
+display_startup_errors = On
+; 启用内存使用信息的收集
+mysqlnd.collect_memory_statistics = On
+; 开启 PHP 信息输出
+expose_php = 1
+; 单次请求允许上传的文件数量
+max_file_uploads = 10
+; 允许上传的最大文件大小，还要注意 Nginx 的 client_max_body_size 配置
+post_max_size = 50M
+upload_max_filesize = 50M
+; 默认时区
+date.timezone = Asia/Shanghai
+; 最大超时时间
+max_execution_time = 5
+; 关闭 Opcache
+opcache.enable = 0

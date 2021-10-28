@@ -1,5 +1,7 @@
-/vendor/
-/.vscode/
-/.idea/
-/var/
+/src/vendor
+/src/.idea
+/src/var
+/src/.env
+/nginx/log
+/mysql/log
 .env

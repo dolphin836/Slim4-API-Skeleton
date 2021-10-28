@@ -1,0 +1,96 @@
+# 开发环境
+# MySQL 使用本地服务、开放所有端口、提供 phpMyAdmin
+# 王海兵 2020-05-24
+
+version: "3.9"
+
+volumes:
+  data:
+  cache:
+  queue:
+
+services:
+  nginx:
+    image: nginx
+    container_name: ${APP_NAME}_nginx
+    restart: always
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/log:/var/log/nginx
+    ports:
+      - ${HTTP_PORT}:80
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    image: ${APP_NAME}_php-fpm
+    build: ./php
+    container_name: ${APP_NAME}_php-fpm
+    restart: always
+    volumes:
+      - ./src:/var/www/html
+      - ./php/php.ini-development:/usr/local/etc/php/php.ini
+      - ./php/supervisord.conf:/etc/supervisord.conf
+      - ./php/supervisor.d:/etc/supervisor.d
+      - ./php/cron:/var/spool/cron/crontabs
+    ports:
+      - ${SUPERVISOR_PORT}:9001
+    depends_on:
+      - db
+      - redis
+      - mq
+
+  db:
+    image: mysql
+    container_name: ${APP_NAME}_mysql
+    restart: always
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - data:/var/lib/mysql
+      - ./mysql/log:/var/log/mysql
+      - ./mysql/MySQL.sql:/docker-entrypoint-initdb.d/db.sql
+    command:
+      - --default-time-zone=+08:00 # 设置时区
+      - --slow_query_log=ON # 启用慢查询日志
+      - --long_query_time=0.5 # 慢查询日志记录的阀值：500 ms
+      - --log_queries_not_using_indexes=ON # 慢查询记录未使用索引的记录
+      - --slow_query_log_file=/var/log/mysql/slow.log # 慢查询的文件名
+
+  phpMyAdmin:
+    image: phpmyadmin
+    container_name: ${APP_NAME}_phpmyadmin
+    restart: always
+    ports:
+      - ${PHPMYADMIN_PORT}:80
+    environment:
+      - PMA_ARBITRARY=1
+
+  redis:
+    image: redis
+    restart: always
+    container_name: ${APP_NAME}_redis
+    ports:
+      - ${REDIS_PORT}:6379
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - cache:/data
+      
+  mq:
+    image: ${APP_NAME}_rabbitmq
+    build: ./rabbitmq
+    restart: always
+    hostname: ${APP_NAME}_mq
+    container_name: ${APP_NAME}_mq
+    ports:
+      - ${RABBITMQ_MANAGEMENT_PORT}:15672
+      - ${RABBITMQ_MQTT_PORT}:1883
+      - ${RABBITMQ_WEB_MQTT_PORT}:15675
+    volumes:
+      - queue:/var/lib/rabbitmq/mnesia/rabbit@app_mq
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
